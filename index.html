@@ -21,28 +21,63 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="bckgrnd"></div>
-    <div class="header"></div>
-    <div class="main-container mt-3 d-flex justify-content-between">
-      <div class="sounds d-flex justify-content-evenly">
-        <div class="bowl enst pause">
-          <img src="/img/bowlSound.svg" />
-        </div>
-        <div class="bamboo enst pause">
-          <img src="/img/bambooSound.svg" />
-        </div>
-        <div class="wind enst pause">
-          <img src="/img/windSound.svg" />
+    <div class="container-block">
+      <div class="header"></div>
+      <div class="main-container d-flex justify-content-between pb-4">
+        <div class="row w-100 d-flex">
+          <div class="col-10">
+            <div class="row g-3">
+              <div class="col-sm-4 d-flex justify-content-center pt-3">
+                <div class="bowl enst pause">
+                  <img src="/img/bowlSound.svg" />
+                </div>
+              </div>
+              <div class="col-sm-4 d-flex justify-content-center pt-3">
+                <div class="bamboo enst pause">
+                  <img src="/img/bambooSound.svg" />
+                </div>
+              </div>
+              <div class="col-sm-4 d-flex justify-content-center pt-3">
+                <div class="wind enst pause">
+                  <img src="/img/windSound.svg" />
+                </div>
+              </div>
+              <div class="col-sm-4 d-flex justify-content-center pt-3">
+                <div class="snow enst pause">
+                  <img src="/img/snowSound.svg" />
+                </div>
+              </div>
+              <div class="col-sm-4 d-flex justify-content-center pt-3">
+                <div class="fire enst pause">
+                  <img src="/img/fireSound.svg" />
+                </div>
+              </div>
+              <div class="col-sm-4 d-flex justify-content-center pt-3">
+                <div class="rain enst pause">
+                  <img src="/img/rainSound.svg" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="playingSection m-2 ms-auto"></div>
+          </div>
         </div>
       </div>
-      <div class="playingSection"></div>
+      <footer class="text-white-50 bg-dark">
+        <div class="container">
+          <p class="fs-6 text text-end">
+            Sound Effect from
+            <a
+              class="text-decoration-none text-white"
+              href="https://pixabay.com/"
+              >Pixabay</a
+            >
+          </p>
+        </div>
+      </footer>
     </div>
-    <!-- <span class="footerSpan"
-      >Photo by Prasanth Inturi:
-      https://www.pexels.com/photo/silhouette-of-man-at-daytime-1051838/</span
-    >
-    <span>Sound Effect from <a href="https://pixabay.com/">Pixabay</a>
- -->
+
     <script src="/app.js"></script>
   </body>
 </html>

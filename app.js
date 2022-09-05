@@ -1,6 +1,9 @@
 const bowl = document.querySelector(".bowl");
 const bamboo = document.querySelector(".bamboo");
 const wind = document.querySelector(".wind");
+const snow = document.querySelector(".snow");
+const fire = document.querySelector(".fire");
+const rain = document.querySelector(".rain");
 const playingSection = document.querySelector(".playingSection");
 
 var bowlSound = new Audio("/sound/bowl.mp3");
@@ -9,6 +12,12 @@ var bambooSound = new Audio("/sound/bamboo.mp3");
 bambooSound.id = "bambooSound";
 var windSound = new Audio("/sound/wind.mp3");
 windSound.id = "windSound";
+var snowSound = new Audio("/sound/snow.mp3");
+snowSound.id = "snowSound";
+var fireSound = new Audio("/sound/fire.mp3");
+fireSound.id = "fireSound";
+var rainSound = new Audio("/sound/rain.mp3");
+rainSound.id = "rainSound";
 
 async function playSound(sound) {
   await fetch(sound.src);
@@ -58,6 +67,40 @@ wind.addEventListener("click", () => {
     playSound(windSound);
     wind.classList.remove("pause");
     wind.classList.add("playing");
+  }
+});
+
+snow.addEventListener("click", () => {
+  if (snow.classList.contains("playing")) {
+    stopSound(snowSound);
+    snow.classList.remove("playing");
+    snow.classList.add("pause");
+  } else if (snow.classList.contains("pause")) {
+    playSound(snowSound);
+    snow.classList.remove("pause");
+    snow.classList.add("playing");
+  }
+});
+fire.addEventListener("click", () => {
+  if (fire.classList.contains("playing")) {
+    stopSound(fireSound);
+    fire.classList.remove("playing");
+    fire.classList.add("pause");
+  } else if (fire.classList.contains("pause")) {
+    playSound(fireSound);
+    fire.classList.remove("pause");
+    fire.classList.add("playing");
+  }
+});
+rain.addEventListener("click", () => {
+  if (rain.classList.contains("playing")) {
+    stopSound(rainSound);
+    rain.classList.remove("playing");
+    rain.classList.add("pause");
+  } else if (rain.classList.contains("pause")) {
+    playSound(rainSound);
+    rain.classList.remove("pause");
+    rain.classList.add("playing");
   }
 });
 
