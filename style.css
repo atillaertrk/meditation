@@ -35,12 +35,39 @@ body {
   background-color: #020202a6;
 }
 .playingSection {
-  width: 50px;
-  position: fixed;
+  width: 100%;
 }
 .playingElement {
   padding: 5px;
+  height: 60px;
+  width: 60px;
+  margin-right: 12px;
 }
 footer {
   width: 100vw;
+}
+#formSelect {
+  background-color: var(--bs-dark);
+  color: aliceblue;
+}
+.time {
+  width: 50px;
+  height: 50px;
+  font-size: 22px;
+  margin: 5px;
+}
+.timebutton {
+  height: 50px;
+  width: 100px;
+  margin-left: 10px;
+  color: aliceblue;
+  font-size: 22px;
+}
+.warning {
+  height: 50px;
+}
+.warning p {
+  margin: 0;
+  padding: 0;
+  transform: translateY(50%);
 }

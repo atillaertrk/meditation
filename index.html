@@ -23,9 +23,32 @@
   <body>
     <div class="container-block">
       <div class="header"></div>
+      <div
+        class="counter container d-flex justify-content-center align-items-center flex-wrap"
+      >
+        <div class="time-line d-flex align-items-center">
+          <input
+            class="form-control time"
+            id="minute"
+            placeholder="4"
+            disabled
+          />
+          <span style="font-size: 32px; color: aliceblue">:</span>
+          <input
+            class="form-control time"
+            id="second"
+            placeholder="59"
+            disabled
+          />
+          <button class="btn btn-warning timebutton">Start</button>
+        </div>
+        <div class="bg-success text-white-50 ms-2 warning">
+          <p class="px-2">When the time is up, the sounds stop.</p>
+        </div>
+      </div>
       <div class="main-container d-flex justify-content-between pb-4">
         <div class="row w-100 d-flex">
-          <div class="col-10">
+          <div class="col-12">
             <div class="row g-3">
               <div class="col-sm-4 d-flex justify-content-center pt-3">
                 <div class="bowl enst pause">
@@ -59,8 +82,10 @@
               </div>
             </div>
           </div>
-          <div class="col-2">
-            <div class="playingSection m-2 ms-auto"></div>
+          <div class="col-12">
+            <div
+              class="container playingSection m-3 d-flex justify-content-center"
+            ></div>
           </div>
         </div>
       </div>
