@@ -22,24 +22,49 @@
   </head>
   <body>
     <div class="container-block">
-      <div class="header"></div>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a href="#" class="navbar-brand">Meditation Sounds</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarNav"
+          >
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a aria-current="page" href="#" class="nav-link active"
+                  >GitHub Page</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">Support Me</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
       <div
-        class="counter container d-flex justify-content-center align-items-center flex-wrap"
+        class="counter form container mt-3 d-flex justify-content-center align-items flex-wrap"
       >
         <div class="time-line d-flex align-items-center">
-          <input
-            class="form-control time"
-            id="minute"
-            placeholder="4"
-            disabled
-          />
-          <span style="font-size: 32px; color: aliceblue">:</span>
-          <input
-            class="form-control time"
-            id="second"
-            placeholder="59"
-            disabled
-          />
+          <select class="form-control" name="timeSelect" id="timeSelect">
+            <option value="10">10 min</option>
+            <option value="20">20 min</option>
+            <option value="30">30 min</option>
+            <option value="40">40 min</option>
+            <option value="50">50 min</option>
+            <option value="60">1 hour</option>
+          </select>
           <button class="btn btn-warning timebutton">Start</button>
         </div>
         <div class="bg-success text-white-50 ms-2 warning">
@@ -82,7 +107,7 @@
               </div>
             </div>
           </div>
-          <div class="col-12">
+          <div class="col-12 mt-3">
             <div
               class="container playingSection m-3 d-flex justify-content-center"
             ></div>
@@ -104,5 +129,10 @@
     </div>
 
     <script src="/app.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
