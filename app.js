@@ -4,6 +4,8 @@ const wind = document.querySelector(".wind");
 const snow = document.querySelector(".snow");
 const fire = document.querySelector(".fire");
 const rain = document.querySelector(".rain");
+const timeArea = document.querySelector("#timeArea");
+const timeButton = document.querySelector(".timebutton");
 const playingSection = document.querySelector(".playingSection");
 
 var bowlSound = new Audio("/sound/bowl.mp3");
@@ -22,11 +24,11 @@ rainSound.id = "rainSound";
 async function playSound(sound) {
   await fetch(sound.src);
   await sound.play();
+  sound.loop = true;
   var playImg = `<div class="playingElement" id="${sound.id}">
   <img src="/img/${sound.id}.svg" />
 </div>`;
   playingSection.insertAdjacentHTML("beforeend", playImg);
-  //   delElement();
 }
 function stopSound(sound) {
   sound.pause();
@@ -103,6 +105,31 @@ rain.addEventListener("click", () => {
     rain.classList.add("playing");
   }
 });
+
+timeButton.addEventListener("click", function (inputValue) {
+  inputValue = parseInt(document.querySelector("#timeSelect").value);
+  second = 59;
+  inputValue -= 1;
+  timeCounter(inputValue, second);
+  timeArea.innerHTML = `${inputValue} : ${second}`;
+});
+
+function timeCounter(min, sec) {
+  sec = 59;
+  let timing = setInterval(function () {
+    sec--;
+    if (sec == 0) {
+      sec = 59;
+      min -= 1;
+    }
+    if (sec == 1 && min == 0) {
+      bowlSound.pause();
+      timeArea.innerHTML = `00 : 00`;
+      clearInterval(timing);
+    }
+    timeArea.innerHTML = `${min} : ${sec}`;
+  }, 1000);
+}
 
 // function delElement() {
 //   playingSection.forEach((element) => {
