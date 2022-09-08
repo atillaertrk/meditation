@@ -25,6 +25,7 @@ async function playSound(sound) {
   await fetch(sound.src);
   await sound.play();
   sound.loop = true;
+  sounds.push(sound);
   var playImg = `<div class="playingElement" id="${sound.id}">
   <img src="/img/${sound.id}.svg" />
 </div>`;
@@ -105,32 +106,42 @@ rain.addEventListener("click", () => {
     rain.classList.add("playing");
   }
 });
+let timeButtonCount = 0;
+let sec = 9;
+let inputValue = parseInt(document.querySelector("#timeSelect").value) - 1;
+timeButton.addEventListener("click", function () {
+  timeButtonCount++;
+  timeArea.innerHTML = `<span id="min">${inputValue}</span> : <span id="sec">${sec}</span>`;
+  if (timeButtonCount % 2 == 1) {
+    timeButton.innerText = "Restart";
+    inputValue = parseInt(document.querySelector("#timeSelect").value) - 1;
+    timing = setInterval(function () {
+      sec--;
+      if (sec >= 0) {
+        timeArea.innerHTML = `<span id="min">${inputValue}</span> : <span id="sec">${sec}</span>`;
+      }
+      if (inputValue != 0 && sec == 0) {
+        inputValue--;
+        sec = 59;
 
-timeButton.addEventListener("click", function (inputValue) {
-  inputValue = parseInt(document.querySelector("#timeSelect").value);
-  second = 59;
-  inputValue -= 1;
-  timeCounter(inputValue, second);
-  timeArea.innerHTML = `${inputValue} : ${second}`;
+        timeArea.innerHTML = `<span id="min">${inputValue}</span> : <span id="sec">${sec}</span>`;
+      }
+      if (inputValue == 0 && sec == 0) {
+        clearInterval(timing);
+        timeArea.innerHTML = `Time Over`;
+        inputValue = parseInt(document.querySelector("#timeSelect").value) - 1;
+        sec = 59;
+      }
+    }, 1000);
+  } else if (timeButtonCount % 2 == 0) {
+    clearInterval(timing);
+    timeButton.innerText = "Start";
+    inputValue = parseInt(document.querySelector("#timeSelect").value) - 1;
+    sec = 59;
+  }
 });
 
-function timeCounter(min, sec) {
-  sec = 59;
-  let timing = setInterval(function () {
-    sec--;
-    if (sec == 0) {
-      sec = 59;
-      min -= 1;
-    }
-    if (sec == 1 && min == 0) {
-      bowlSound.pause();
-      timeArea.innerHTML = `00 : 00`;
-      clearInterval(timing);
-    }
-    timeArea.innerHTML = `${min} : ${sec}`;
-  }, 1000);
-}
-
+// timeButton.addEventListener("click", function () {
 // function delElement() {
 //   playingSection.forEach((element) => {
 //     element.addEventListener("click", (element) => {
