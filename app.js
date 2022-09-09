@@ -7,6 +7,7 @@ const rain = document.querySelector(".rain");
 const timeArea = document.querySelector("#timeArea");
 const timeButton = document.querySelector(".timebutton");
 const playingSection = document.querySelector(".playingSection");
+const soundsGrid = document.querySelector(".soundsGrid");
 
 var bowlSound = new Audio("/sound/bowl.mp3");
 bowlSound.id = "bowlSound";
@@ -21,11 +22,12 @@ fireSound.id = "fireSound";
 var rainSound = new Audio("/sound/rain.mp3");
 rainSound.id = "rainSound";
 
+sounds = [bowlSound, bambooSound, windSound, snowSound, fireSound, rainSound];
+
 async function playSound(sound) {
   await fetch(sound.src);
   await sound.play();
   sound.loop = true;
-  sounds.push(sound);
   var playImg = `<div class="playingElement" id="${sound.id}">
   <img src="/img/${sound.id}.svg" />
 </div>`;
@@ -131,6 +133,21 @@ timeButton.addEventListener("click", function () {
         timeArea.innerHTML = `Time Over`;
         inputValue = parseInt(document.querySelector("#timeSelect").value) - 1;
         sec = 59;
+        for (let i of sounds) {
+          if (i.paused == false) {
+            stopSound(i);
+            for (let x = 0; x < soundsGrid.children.length; x++) {
+              if (
+                soundsGrid.children[x].children[0].classList.contains(
+                  "playing"
+                ) == true
+              ) {
+                soundsGrid.children[x].children[0].classList.remove("playing");
+                soundsGrid.children[x].children[0].classList.add("pause");
+              }
+            }
+          }
+        }
       }
     }, 1000);
   } else if (timeButtonCount % 2 == 0) {
