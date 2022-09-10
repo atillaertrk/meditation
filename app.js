@@ -22,7 +22,14 @@ fireSound.id = "fireSound";
 var rainSound = new Audio("/sound/rain.mp3");
 rainSound.id = "rainSound";
 
-sounds = [bowlSound, bambooSound, windSound, snowSound, fireSound, rainSound];
+var sections = [
+  { bowl, bowlSound },
+  { bamboo, bambooSound },
+  { wind, windSound },
+  { snow, snowSound },
+  { fire, fireSound },
+  { rain, rainSound },
+];
 
 async function playSound(sound) {
   await fetch(sound.src);
@@ -40,74 +47,19 @@ function stopSound(sound) {
     .querySelector(`#${sound.id}`)
     .parentElement.removeChild(document.querySelector(`#${sound.id}`));
 }
-bowl.addEventListener("click", () => {
-  if (bowl.classList.contains("playing")) {
-    stopSound(bowlSound);
-    bowl.classList.remove("playing");
-    bowl.classList.add("pause");
-  } else if (bowl.classList.contains("pause")) {
-    playSound(bowlSound);
-    bowl.classList.remove("pause");
-    bowl.classList.add("playing");
-  }
-});
-bamboo.addEventListener("click", () => {
-  if (bamboo.classList.contains("playing")) {
-    stopSound(bambooSound);
-    bamboo.classList.remove("playing");
-    bamboo.classList.add("pause");
-  } else if (bamboo.classList.contains("pause")) {
-    playSound(bambooSound);
-    bamboo.classList.remove("pause");
-    bamboo.classList.add("playing");
-  }
-});
-
-wind.addEventListener("click", () => {
-  if (wind.classList.contains("playing")) {
-    stopSound(windSound);
-    wind.classList.remove("playing");
-    wind.classList.add("pause");
-  } else if (wind.classList.contains("pause")) {
-    playSound(windSound);
-    wind.classList.remove("pause");
-    wind.classList.add("playing");
-  }
-});
-
-snow.addEventListener("click", () => {
-  if (snow.classList.contains("playing")) {
-    stopSound(snowSound);
-    snow.classList.remove("playing");
-    snow.classList.add("pause");
-  } else if (snow.classList.contains("pause")) {
-    playSound(snowSound);
-    snow.classList.remove("pause");
-    snow.classList.add("playing");
-  }
-});
-fire.addEventListener("click", () => {
-  if (fire.classList.contains("playing")) {
-    stopSound(fireSound);
-    fire.classList.remove("playing");
-    fire.classList.add("pause");
-  } else if (fire.classList.contains("pause")) {
-    playSound(fireSound);
-    fire.classList.remove("pause");
-    fire.classList.add("playing");
-  }
-});
-rain.addEventListener("click", () => {
-  if (rain.classList.contains("playing")) {
-    stopSound(rainSound);
-    rain.classList.remove("playing");
-    rain.classList.add("pause");
-  } else if (rain.classList.contains("pause")) {
-    playSound(rainSound);
-    rain.classList.remove("pause");
-    rain.classList.add("playing");
-  }
-});
+for (let i in sections) {
+  Object.values(sections[i])[0].addEventListener("click", () => {
+    if (Object.values(sections[i])[0].classList.contains("playing")) {
+      stopSound(Object.values(sections[i])[1]);
+      Object.values(sections[i])[0].classList.remove("playing");
+      Object.values(sections[i])[0].classList.add("pause");
+    } else if (Object.values(sections[i])[0].classList.contains("pause")) {
+      playSound(Object.values(sections[i])[1]);
+      Object.values(sections[i])[0].classList.remove("pause");
+      Object.values(sections[i])[0].classList.add("playing");
+    }
+  });
+}
 let timeButtonCount = 0;
 let sec = 9;
 let inputValue = parseInt(document.querySelector("#timeSelect").value) - 1;
@@ -133,9 +85,9 @@ timeButton.addEventListener("click", function () {
         timeArea.innerHTML = `Time Over`;
         inputValue = parseInt(document.querySelector("#timeSelect").value) - 1;
         sec = 59;
-        for (let i of sounds) {
-          if (i.paused == false) {
-            stopSound(i);
+        for (let i in sections) {
+          if (Object.values(sections[i])[1].paused == false) {
+            stopSound(Object.values(sections[i])[1]);
             for (let x = 0; x < soundsGrid.children.length; x++) {
               if (
                 soundsGrid.children[x].children[0].classList.contains(
@@ -157,12 +109,3 @@ timeButton.addEventListener("click", function () {
     sec = 59;
   }
 });
-
-// timeButton.addEventListener("click", function () {
-// function delElement() {
-//   playingSection.forEach((element) => {
-//     element.addEventListener("click", (element) => {
-//       element.parentElement.removeChild(element);
-//     });
-//   });
-// }
