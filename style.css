@@ -80,3 +80,7 @@ footer {
 .logo-img {
   height: 25px;
 }
+.form-range {
+  transform: rotate(-90deg);
+  width: 100px;
+}

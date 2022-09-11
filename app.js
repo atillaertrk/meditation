@@ -51,9 +51,11 @@ for (let i in sections) {
   Object.values(sections[i])[0].addEventListener("click", () => {
     if (Object.values(sections[i])[0].classList.contains("playing")) {
       stopSound(Object.values(sections[i])[1]);
+      Object.values(sections[i])[0].nextElementSibling.disabled = true;
       Object.values(sections[i])[0].classList.remove("playing");
       Object.values(sections[i])[0].classList.add("pause");
     } else if (Object.values(sections[i])[0].classList.contains("pause")) {
+      Object.values(sections[i])[0].nextElementSibling.disabled = false;
       playSound(Object.values(sections[i])[1]);
       Object.values(sections[i])[0].classList.remove("pause");
       Object.values(sections[i])[0].classList.add("playing");
@@ -61,7 +63,7 @@ for (let i in sections) {
   });
 }
 let timeButtonCount = 0;
-let sec = 9;
+let sec = 59;
 let inputValue = parseInt(document.querySelector("#timeSelect").value) - 1;
 timeButton.addEventListener("click", function () {
   timeButtonCount++;
@@ -71,6 +73,10 @@ timeButton.addEventListener("click", function () {
     inputValue = parseInt(document.querySelector("#timeSelect").value) - 1;
     timing = setInterval(function () {
       sec--;
+      if (sec < 10) {
+        sec = (sec < 10 ? "0" : "") + sec;
+      }
+
       if (sec >= 0) {
         timeArea.innerHTML = `<span id="min">${inputValue}</span> : <span id="sec">${sec}</span>`;
       }
