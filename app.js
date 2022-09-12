@@ -8,6 +8,12 @@ const timeArea = document.querySelector("#timeArea");
 const timeButton = document.querySelector(".timebutton");
 const playingSection = document.querySelector(".playingSection");
 const soundsGrid = document.querySelector(".soundsGrid");
+const bowlRange = document.querySelector(".bowlRange");
+const bambooRange = document.querySelector(".bambooRange");
+const windRange = document.querySelector(".windRange");
+const snowRange = document.querySelector(".snowRange");
+const fireRange = document.querySelector(".fireRange");
+const rainRange = document.querySelector(".rainRange");
 
 var bowlSound = new Audio("/sound/bowl.mp3");
 bowlSound.id = "bowlSound";
@@ -23,12 +29,12 @@ var rainSound = new Audio("/sound/rain.mp3");
 rainSound.id = "rainSound";
 
 var sections = [
-  { bowl, bowlSound },
-  { bamboo, bambooSound },
-  { wind, windSound },
-  { snow, snowSound },
-  { fire, fireSound },
-  { rain, rainSound },
+  { bowl, bowlSound, bowlRange },
+  { bamboo, bambooSound, bambooRange },
+  { wind, windSound, windRange },
+  { snow, snowSound, snowRange },
+  { fire, fireSound, fireRange },
+  { rain, rainSound, rainRange },
 ];
 
 async function playSound(sound) {
@@ -49,6 +55,8 @@ function stopSound(sound) {
 }
 for (let i in sections) {
   Object.values(sections[i])[0].addEventListener("click", () => {
+    Object.values(sections[i])[1].volume =
+      parseInt(Object.values(sections[i])[2].value) / 100;
     if (Object.values(sections[i])[0].classList.contains("playing")) {
       stopSound(Object.values(sections[i])[1]);
       Object.values(sections[i])[0].nextElementSibling.disabled = true;
@@ -114,4 +122,14 @@ timeButton.addEventListener("click", function () {
     inputValue = parseInt(document.querySelector("#timeSelect").value) - 1;
     sec = 59;
   }
+});
+for (let i in sections) {
+  Object.values(sections[i])[2].addEventListener("input", () => {
+    Object.values(sections[i])[1].volume =
+      parseInt(Object.values(sections[i])[2].value) / 100;
+  });
+}
+
+snowRange.addEventListener("input", () => {
+  snowSound.volume = parseInt(snowRange.value) / 100;
 });
